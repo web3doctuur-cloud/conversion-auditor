@@ -7,17 +7,17 @@ COPY package*.json ./
 COPY server/package*.json ./server/
 COPY client/package*.json ./client/
 
-# Install dependencies
+# Install dependencies (Playwright browsers already in the base image)
 RUN npm install
 
 # Copy application code
 COPY . .
 
-# Install Playwright browsers
-RUN npx playwright install chromium
+# Build TypeScript (server only)
+RUN npm run build -w server
 
-# Build TypeScript
-RUN npm run build
+# Set environment variable for browser location
+ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 
 EXPOSE 3001
 
