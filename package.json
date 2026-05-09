@@ -5,7 +5,9 @@
   "workspaces": ["client", "server"],
   "scripts": {
     "dev": "concurrently \"npm run dev --workspace=server\" \"npm run dev --workspace=client\"",
-    "install:all": "npm install"
+    "install:all": "npm install && npx playwright install chromium",
+    "build": "npm run build --workspace=server",
+    "start": "npm run start --workspace=server"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
