@@ -1,7 +1,7 @@
 import UrlInputForm from './UrlInputForm';
 
 interface Props {
-  onAudit: (url: string) => void;
+  onAudit: (urls: string[]) => void;
   loading: boolean;
   error?: string;
 }
