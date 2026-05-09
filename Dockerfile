@@ -1,26 +1,24 @@
-FROM mcr.microsoft.com/playwright:v1.44.0-jammy
+FROM mcr.microsoft.com/playwright:v1.40.0-focal
 
 WORKDIR /app
 
-# Copy package files for workspace setup
-COPY package.json ./
-COPY server/package.json ./server/
-COPY client/package.json ./client/
+# Copy package files
+COPY package*.json ./
+COPY server/package*.json ./server/
+COPY client/package*.json ./client/
 
-# Install all dependencies (we need this for the workspace structure)
+# Install dependencies
 RUN npm install
 
-# Copy all source code
+# Copy application code
 COPY . .
 
-# Build the server
-RUN npm run build -w server
+# Install Playwright browsers
+RUN npx playwright install chromium
 
-# Set environment variables
-ENV PORT=4000
-ENV NODE_ENV=production
+# Build TypeScript
+RUN npm run build
 
-EXPOSE 4000
+EXPOSE 3001
 
-# Start the server
-CMD ["npm", "start", "-w", "server"]
+CMD ["npm", "run", "start"]
