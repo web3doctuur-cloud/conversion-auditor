@@ -6,9 +6,14 @@ import auditRouter from './routes/audit';
 
 const app = express();
 const PORT = parseInt(process.env.PORT ?? '4000', 10);
-const origins = (process.env.ALLOWED_ORIGINS ?? 'http://localhost:5173').split(',');
+const origins = (process.env.ALLOWED_ORIGINS && process.env.ALLOWED_ORIGINS !== '*') 
+  ? process.env.ALLOWED_ORIGINS.split(',') 
+  : true;
 
-app.use(cors({ origin: origins, credentials: true }));
+app.use(cors({ 
+  origin: origins, 
+  credentials: true 
+}));
 app.use(express.json({ limit: '1mb' }));
 
 // Increase request timeout to 35 s to accommodate long audits

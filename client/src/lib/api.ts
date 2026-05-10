@@ -1,6 +1,6 @@
 import { AuditReport } from '../types/audit';
 
-const BASE = import.meta.env.VITE_API_BASE_URL ?? '';
+const BASE = import.meta.env.VITE_API_BASE_URL ?? 'https://conversion-auditor-backend.onrender.com';
 
 export async function runAudit(url: string): Promise<AuditReport> {
   const res = await fetch(`${BASE}/api/audit`, {
