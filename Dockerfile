@@ -7,8 +7,11 @@ COPY package*.json ./
 COPY server/package*.json ./server/
 COPY client/package*.json ./client/
 
-# Install dependencies (Playwright browsers already in the base image)
+# Install dependencies
 RUN npm install
+
+# Fix for 'sharp' module on Linux (ensures the correct binary is installed)
+RUN npm install --os=linux --cpu=x64 sharp
 
 # Copy application code
 COPY . .
