@@ -1,6 +1,0 @@
-{
-  "buildCommand": "npm run build --workspace=client",
-  "outputDirectory": "client/dist",
-  "installCommand": "npm install --legacy-peer-deps",
-  "framework": "vite"
-}
